@@ -14,7 +14,7 @@ ENV S3_TMP /tmp/s3cmd.zip
 RUN apk --update add python py-pip jq wget && \
     pip install awscli \
     && wget --no-check-certificate -O ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip \
-    && unzip ${S3_TMP} \
+    && unzip ${S3_TMP} -d /tmp \
     && mv /tmp/s3cmd-master/S3 /tmp/s3cmd-master/s3cmd /usr/bin/
 
 CMD ["/bin/sh"]
