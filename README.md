@@ -1,11 +1,6 @@
 What is docker-aws
 ==============
-[Docker](https://docker.io) image for running the [Amazon Web Services Command Line Interface](http://aws.amazon.com/cli/). It creates a [Docker](https://docker.io) image containing all dependencies needed to run `aws`. That way, you can run `aws` in a [Docker](https://docker.io) container without setting the `aws` dependencies on the host system.
-
-
-Background
-----------
-The `aws` command is a command line interface for [Amazon's Web Services](http://aws.amazon.com), like [EC2](http://aws.amazon.com/ec2), [S3](http://aws.amazon.com/s3/), etc.
+[Docker](https://docker.io) image for running the [Amazon Web Services Command Line Interface](http://aws.amazon.com/cli/) and [s3cmd](https://github.com/s3tools/s3cmd). It creates a [Docker](https://docker.io) image containing all dependencies needed to run `aws` and `s3cmd`. That way, you can run these tools in a [Docker](https://docker.io) container without setting the dependencies on the host system.
 
 
 Run from Docker Hub
@@ -14,7 +9,7 @@ A pre-built image is available on [Docker Hub](https://registry.hub.docker.com/u
 
     docker run -it cgswong/aws
 
-The container will start a `bash` shell with the [aws](http://docs.aws.amazon.com/cli/latest/reference/) command ready to use.
+The container will start a `sh` shell with the tools command ready to use.
 
 
 Build from Source
@@ -23,19 +18,19 @@ Build from Source
 
 2. Clone _docker-aws_ from [GitHub](https://github.com/cgswong/docker-aws)
 
-   ```bash
+   ```sh
    git clone https://github.com/cgswong/docker-aws.git
    ```
 3. Build the docker image
 
-   ```bash
+   ```sh
    cd docker-aws
    docker build -t cgswong/aws:latest .
    ```
 
 4. Run a docker container with that image
 
-   ```bash
+   ```sh
    docker run -it cgswong/aws
    ```
 
@@ -45,15 +40,15 @@ How To
 The following commands should be run inside the [cgswong/aws](https://github.com/cgswong/docker-aws) Docker container. When you run the script for the first time, you need to configure the [aws cli](http://aws.amazon.com/cli) with your AWS credentials:
 
 
-```
-> aws configure
-AWS Access Key ID [****************VSSQ]:
-AWS Secret Access Key [****************UkAC]:
-Default region name [aws-central-1]:
-Default output format [None]:
+```sh
+/ # aws configure
+AWS Access Key ID [None]: [YOUR_AWS_ACCESS_KEY_ID_HERE]
+AWS Secret Access Key [None]: [YOUR_AWS_SECRET_ACCESS_KEY_ID_HERE]
+Default region name [None]: [YOUR_AWS_REGION_HERE]
+Default output format [None]: [YOUR_AWS_OUTPUT_FORMAT_HERE]
 ```
 
 
-Getting started with the AWS CLI
---------------------------------
-For documentation on the AWS CLI, see the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli).
+Getting started with the AWS CLI and s3tools
+--------------------------------------------
+For documentation on the AWS CLI, see the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli). For S3 tools, see the [S3 tools documentation](http://s3tools.org/usage).
