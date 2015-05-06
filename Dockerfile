@@ -26,5 +26,5 @@ WORKDIR /root
 # Expose volume for adding credentials
 VOLUME ["/root/.aws"]
 
-ENTRYPOINT ["/usr/bin/s3cmd"]
-CMD ["--help"]
+#ENTRYPOINT ["/usr/bin/s3cmd"]
+CMD ["/bin/bash"]
