@@ -13,7 +13,7 @@ dependencies:
 
 test:
   override:
-    - docker run cgswong/aws:rds rds --help; sleep 10
+    - docker run cgswong/aws:rds --version; sleep 10
 
 deployment:
   hub:
