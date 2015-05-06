@@ -47,5 +47,4 @@ WORKDIR /root
 # Expose volume for adding credentials
 VOLUME ["/root/.aws"]
 
-ENTRYPOINT ["/usr/bin/aws"]
-CMD [""]
+CMD ["/bin/bash"]
