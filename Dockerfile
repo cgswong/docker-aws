@@ -4,8 +4,6 @@
 
 FROM gliderlabs/alpine:3.1
 
-ENV S3_TMP /tmp/s3cmd.zip
-ENV S3_ZIP /tmp/s3cmd-master
 ENV RDS_TMP /tmp/RDSCLi.zip
 ENV RDS_VERSION 1.19.004
 ENV AWS_RDS_HOME /usr/local/RDSCli-${RDS_VERSION}
@@ -19,17 +17,11 @@ ENV PATH $PATH:$JAVA_HOME/bin:$AWS_RDS_HOME/bin
 WORKDIR /tmp
 
 RUN apk --update add \
-      python \
-      py-pip \
       jq \
       wget \
       bash &&\
-    pip install --upgrade awscli &&\
-    wget --no-check-certificate -O ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
     wget --no-check-certificate -O ${RDS_TMP} http://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
-    unzip ${S3_TMP} -d /tmp &&\
     unzip ${RDS_TMP} -d /tmp &&\
-    mv ${S3_ZIP}/S3 ${S3_ZIP}/s3cmd /usr/bin/ &&\
     mv /tmp/RDSCli-${RDS_VERSION} /usr/local/ &&\
     wget --no-check-certificate "https://circle-artifacts.com/gh/andyshinn/alpine-pkg-glibc/6/artifacts/0/home/ubuntu/alpine-pkg-glibc/packages/x86_64/glibc-2.21-r2.apk" &&\
     wget --no-check-certificate "https://circle-artifacts.com/gh/andyshinn/alpine-pkg-glibc/6/artifacts/0/home/ubuntu/alpine-pkg-glibc/packages/x86_64/glibc-bin-2.21-r2.apk" &&\
@@ -47,5 +39,5 @@ WORKDIR /root
 # Expose volume for adding credentials
 VOLUME ["/root/.aws"]
 
-ENTRYPOINT ["/usr/bin/aws"]
-CMD [""]
+ENTRYPOINT ["rds"]
+CMD ["--help"]
