@@ -1,6 +1,6 @@
 What is docker-aws
 ==============
-[![Circle CI](https://circleci.com/gh/cgswong/docker-aws/tree/master.svg?style=svg)](https://circleci.com/gh/cgswong/docker-aws/tree/master)
+[![Circle CI](https://circleci.com/gh/cgswong/docker-aws/tree/rds.svg?style=svg)](https://circleci.com/gh/cgswong/docker-aws/tree/rds)
 
 [Docker](https://docker.io) image for running the [Amazon Web Services Command Line Interface](http://aws.amazon.com/cli/) and [s3cmd](https://github.com/s3tools/s3cmd). It creates a [Docker](https://docker.io) image containing all dependencies needed to run `aws` and `s3cmd`. That way, you can run these tools in a [Docker](https://docker.io) container without setting the dependencies on the host system.
 
