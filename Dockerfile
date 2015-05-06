@@ -11,9 +11,10 @@ WORKDIR /tmp
 
 RUN apk --update add \
       python \
-      jq \
+      py-pip \
       wget \
       bash &&\
+    pip install python-dateutil
     wget --no-check-certificate -O ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
     unzip ${S3_TMP} -d /tmp &&\
     mv ${S3_ZIP}/S3 ${S3_ZIP}/s3cmd /usr/bin/ &&\
