@@ -1,1 +1,1 @@
-AWS, S3 and RDS CLI image based on Alpine Linux (w/Oracle JRE8) and ~301 MB.
+AWS, S3 and RDS CLI image based on Alpine Linux (44 MB - 240 MB depending on tag/images used).

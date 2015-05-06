@@ -24,7 +24,8 @@ RUN apk --update add \
       jq \
       wget \
       bash &&\
-    pip install --upgrade awscli &&\
+    pip install --upgrade awscli \
+      python-dateutil &&\
     wget --no-check-certificate -O ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
     wget --no-check-certificate -O ${RDS_TMP} http://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
     unzip ${S3_TMP} -d /tmp &&\
