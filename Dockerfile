@@ -17,4 +17,4 @@ RUN apk --update add \
 VOLUME ["/root/.aws"]
 
 ENTRYPOINT ["/usr/bin/aws"]
-CMD [""]
+CMD ["--version"]
