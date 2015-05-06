@@ -26,4 +26,4 @@ WORKDIR /root
 VOLUME ["/root/.aws"]
 
 ENTRYPOINT ["/usr/bin/s3cmd"]
-CMD [""]
+CMD ["--help"]
