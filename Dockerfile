@@ -17,6 +17,7 @@ ENV PATH $PATH:$JAVA_HOME/bin:$AWS_RDS_HOME/bin
 WORKDIR /tmp
 
 RUN apk --update add \
+      jq \
       wget \
       bash &&\
     wget --no-check-certificate -O ${RDS_TMP} http://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
