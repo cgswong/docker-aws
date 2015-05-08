@@ -12,6 +12,7 @@ WORKDIR /tmp
 RUN apk --update add \
       python \
       py-pip \
+      jq \
       wget \
       bash &&\
     pip install python-dateutil &&\
