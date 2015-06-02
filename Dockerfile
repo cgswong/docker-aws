@@ -1,8 +1,9 @@
 # ################################################################
-# DESC: Docker file to run AWS CLI, S3CMD and RDS tools.
+# DESC: Docker file to run AWS S3CMD CLI tools.
 # ################################################################
 
 FROM gliderlabs/alpine:3.1
+MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV S3_TMP /tmp/s3cmd.zip
 ENV S3_ZIP /tmp/s3cmd-master
