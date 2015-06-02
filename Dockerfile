@@ -1,8 +1,9 @@
 # ################################################################
-# DESC: Docker file to run AWS CLI, S3CMD and RDS tools.
+# DESC: Docker file to run AWS RDS CLI tools.
 # ################################################################
 
 FROM gliderlabs/alpine:3.1
+MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV RDS_TMP /tmp/RDSCLi.zip
 ENV RDS_VERSION 1.19.004
