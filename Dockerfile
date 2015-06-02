@@ -3,6 +3,7 @@
 # ################################################################
 
 FROM gliderlabs/alpine:3.1
+MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 RUN apk --update add \
       python \
