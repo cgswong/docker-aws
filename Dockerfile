@@ -3,6 +3,7 @@
 # ################################################################
 
 FROM gliderlabs/alpine:3.1
+MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV S3_TMP /tmp/s3cmd.zip
 ENV S3_ZIP /tmp/s3cmd-master
