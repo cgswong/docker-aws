@@ -2,7 +2,7 @@
 # DESC: Docker file to run AWS S3CMD CLI tools.
 # ################################################################
 
-FROM gliderlabs/alpine:3.1
+FROM alpine:latest
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV S3_TMP /tmp/s3cmd.zip
@@ -14,11 +14,13 @@ RUN apk --update add \
       python \
       py-pip \
       jq \
-      wget \
+      curl \
       bash &&\
-    pip install python-dateutil &&\
-    wget --no-check-certificate -O ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
-    unzip ${S3_TMP} -d /tmp &&\
+    pip install --upgrade \
+      pip \
+      python-dateutil &&\
+    curl --silent --insecure --location --output ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
+    unzip -q ${S3_TMP} -d /tmp &&\
     mv ${S3_ZIP}/S3 ${S3_ZIP}/s3cmd /usr/bin/ &&\
     rm -rf /tmp/* &&\
     mkdir /root/.aws
