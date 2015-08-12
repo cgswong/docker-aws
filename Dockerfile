@@ -13,8 +13,8 @@ ENV AWS_RDS_HOME /usr/local/RDSCli-${RDS_VERSION}
 ENV PKG_URL "https://circle-artifacts.com/gh/andyshinn/alpine-pkg-glibc/6/artifacts/0/home/ubuntu/alpine-pkg-glibc/packages/x86_64"
 ENV PATH $PATH:${AWS_RDS_HOME}/bin
 ENV JAVA_VERSION_MAJOR 8
-ENV JAVA_VERSION_MINOR 45
-ENV JAVA_VERSION_BUILD 14
+ENV JAVA_VERSION_MINOR 51
+ENV JAVA_VERSION_BUILD 16
 ENV JAVA_HOME /usr/local/jre
 ENV PATH $PATH:$JAVA_HOME/bin:$AWS_RDS_HOME/bin
 
@@ -52,4 +52,3 @@ WORKDIR /root
 VOLUME ["/root/.aws"]
 
 CMD ["/bin/bash"]
-
