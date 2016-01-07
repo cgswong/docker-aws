@@ -1,23 +1,20 @@
-# ################################################################
 # DESC: Docker file to run AWS CLI tools.
-# ################################################################
-
-FROM alpine:latest
+FROM gliderlabs/alpine:3.3
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
-RUN apk --update add \
-      python \
-      py-pip \
-      jq \
+RUN apk --no-cache add \
+      bash \
       curl \
-      bash &&\
+      jq \
+      py-pip \
+      python &&\
     pip install --upgrade \
       pip \
       awscli &&\
-    mkdir /root/.aws
+    mkdir ~/.aws
 
 # Expose volume for adding credentials
-VOLUME ["/root/.aws"]
+VOLUME ["~/.aws"]
 
 ENTRYPOINT ["/usr/bin/aws"]
 CMD ["--version"]
