@@ -1,10 +1,11 @@
 # DESC: Docker file to run AWS RDS CLI tools.
-FROM cgswong/java:openjre8
+FROM cgswong/java:openjdk8
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV RDS_TMP /tmp/RDSCLi.zip
 ENV RDS_VERSION 1.19.004
 ENV AWS_RDS_HOME /usr/local/RDSCli-${RDS_VERSION}
+ENV JAVA_HOME /usr/lib/jvm/default-jvm
 ENV PATH ${PATH}:${AWS_RDS_HOME}/bin:${JAVA_HOME}/bin:${AWS_RDS_HOME}/bin
 
 WORKDIR /tmp
