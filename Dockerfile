@@ -14,6 +14,8 @@ WORKDIR /tmp
 
 RUN apk --no-cache add \
       bash \
+      groff \
+      less \
       curl \
       jq \
       py-pip \
