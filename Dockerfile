@@ -2,10 +2,13 @@
 FROM gliderlabs/alpine:3.3
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
+ENV PAGER="more"
+
 RUN apk --no-cache add \
       bash \
       curl \
       jq \
+      groff \
       py-pip \
       python &&\
     pip install --upgrade \
