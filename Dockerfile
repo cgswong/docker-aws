@@ -9,11 +9,13 @@ ENV RDS_VERSION 1.19.004
 ENV JAVA_HOME /usr/lib/jvm/default-jvm
 ENV AWS_RDS_HOME /usr/local/RDSCli-${RDS_VERSION}
 ENV PATH ${PATH}:${AWS_RDS_HOME}/bin:${JAVA_HOME}/bin:${AWS_RDS_HOME}/bin
+ENV PAGER more
 
 WORKDIR /tmp
 
 RUN apk --no-cache add \
       bash \
+      bash-completion \
       groff \
       less \
       curl \
@@ -24,6 +26,7 @@ RUN apk --no-cache add \
       awscli \
       pip \
       python-dateutil &&\
+    ln -s /usr/bin/aws_bash_completer /etc/profile.d/aws_bash_completer.sh &&\
     curl -sSL --output ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
     curl -sSL --output ${RDS_TMP} http://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
     unzip -q ${S3_TMP} -d /tmp &&\
@@ -37,4 +40,4 @@ RUN apk --no-cache add \
 # Expose volume for adding credentials
 VOLUME ["~/.aws"]
 
-CMD ["/bin/bash"]
+CMD ["/bin/bash", "--login"]
