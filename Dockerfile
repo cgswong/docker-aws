@@ -22,7 +22,7 @@ RUN apk --no-cache add \
       jq \
       py-pip \
       python \
-      ssh &&\
+      openssh &&\
     pip install --upgrade \
       awscli \
       pip \
