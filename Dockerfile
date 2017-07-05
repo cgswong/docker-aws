@@ -1,5 +1,5 @@
 # DESC: Docker file to run AWS S3CMD CLI tools.
-FROM gliderlabs/alpine:3.3
+FROM gliderlabs/alpine:3.6
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 ENV S3_TMP /tmp/s3cmd.zip
