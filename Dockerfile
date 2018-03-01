@@ -2,10 +2,11 @@
 FROM gliderlabs/alpine:3.6
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
-ENV PAGER="more"
+ENV PAGER="less -r"
 
 RUN apk --no-cache add \
       bash \
+      less \
       curl \
       jq \
       groff \
