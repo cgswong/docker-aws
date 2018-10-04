@@ -13,7 +13,7 @@ before_script:
   - docker --version
   
 script:
-  - docker build -t cgswong/${APP_NAME}:${APP_VERSION}
+  - docker build -t cgswong/${APP_NAME}:${APP_VERSION} .
 
 after_script:
   - docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version
