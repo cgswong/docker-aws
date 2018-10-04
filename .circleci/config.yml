@@ -1,14 +1,13 @@
 version: 2.1
 
 jobs:
-  build:
+  build-test-deploy:
     machine: true
     working_directory: "~/docker-cache"
     environment:
       APP_NAME: aws
       APP_VERSION: 1.16.26
     steps:
-      - checkout
       - run:
         name: Docker version
         command: |
@@ -19,44 +18,19 @@ jobs:
       - run:
         name: Build image
         command: 'docker build -t cgswong/${APP_NAME}:${APP_VERSION} .'
+      - run:
+        name: Test version
+        command: 'docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version'
+      - deploy:
+        command: |
+          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+          docker push cgswong/${APP_NAME}:${APP_VERSION}
       - save_cache:
         key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
         paths:
           - "~/docker-cache"
-  test:
-    environment:
-      APP_NAME: aws
-      APP_VERSION: 1.16.26
-    steps:
-      - checkout
-      - run:
-        name: Test version
-        command: 'docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version'
-
-  deploy:
-    machine:
-      enabled: true
-    working_directory: "~/docker-cache"
-    environment:
-      APP_NAME: aws
-      APP_VERSION: 1.16.26
-    steps:
-      - run:
-        name: Push image
-        command: |
-          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          docker push cgswong/${APP_NAME}:${APP_VERSION}
 
 workflows:
   build-test-deploy:
     jobs:
-      - build
-      - test:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
-      - deploy:
-        requires:
-          - test
+      - build-test-deploy
