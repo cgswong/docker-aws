@@ -3,37 +3,52 @@ jobs:
   build:
     machine: true
     working_directory: "~/docker-cache"
+    environment:
+      APP_NAME: aws
+      APP_VERSION: 1.16.26
     steps:
       - checkout
       - run:
         name: Docker version
-        command: 'docker info'
+        command: |
+          docker info
+          docker --version
       - restore_cache:
         key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
         name: Build image
-        command: 'docker build -t cgswong/aws:latest'
+        command: 'docker build -t cgswong/${APP_NAME}:${APP_VERSION} .'
       - save_cache:
         key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
         paths:
           - "~/docker-cache"
   test:
+    environment:
+      APP_NAME: aws
+      APP_VERSION: 1.16.26
     steps:
       - checkout
       - run:
         name: Test version
-        command: 'docker run cgswong/aws:latest aws --version'
+        command: 'docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version'
 
   deploy:
     machine:
       enabled: true
     working_directory: "~/docker-cache"
-    docker_store:
-      command: $DEPLOY
+    environment:
+      APP_NAME: aws
+      APP_VERSION: 1.16.26
+    steps:
+      - run:
+        name: Push image
+        command: |
+          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+          docker push cgswong/${APP_NAME}:${APP_VERSION}
 
 workflows:
   version: 2
-  build_and_test:
+  build-test-deploy:
     jobs:
       - build
       - test:
@@ -43,3 +58,5 @@ workflows:
           branches:
             only: master
       - deploy
+        requires:
+          - test
