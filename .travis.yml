@@ -1,4 +1,5 @@
 sudo: enabled
+language: generic
 
 services:
   - docker
