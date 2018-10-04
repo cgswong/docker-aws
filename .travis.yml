@@ -10,7 +10,6 @@ env:
 before_install:
   - docker info
   - docker --version
-  - echo "AWS CLI Version: ${AWS_VERSION}"
   - docker build -t cgswong/aws:latest
   
 script:
