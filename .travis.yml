@@ -5,20 +5,23 @@ services:
   - docker
 
 env:
-  AWS_VERSION: 1.16.26
+  APP_NAME: aws
+  APP_VERSION: 1.16.26
 
-before_install:
+before_script:
   - docker info
   - docker --version
-  - docker build -t cgswong/aws:latest
   
 script:
-  - docker run cgswong/aws:latest aws --version
+  - docker build -t cgswong/${APP_NAME}:${APP_VERSION}
+
+after_script:
+  - docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version
 
 deploy:
   provider: script
   script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push cgswong/aws:latest
+    - docker push cgswong/${APP_NAME}:${APP_VERSION}
   on:
     branch: master
