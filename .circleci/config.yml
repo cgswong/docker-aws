@@ -9,26 +9,28 @@ jobs:
       APP_VERSION: 1.16.26
     steps:
       - run:
-        name: Docker version
-        command: |
-          docker info
-          docker --version
+          name: Docker version
+          command: |
+            docker info
+            docker --version
       - restore_cache:
-        key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
+          key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-        name: Build image
-        command: 'docker build -t cgswong/${APP_NAME}:${APP_VERSION} .'
+          name: Build image
+          command: |
+            docker build -t cgswong/${APP_NAME}:${APP_VERSION} .
       - run:
-        name: Test version
-        command: 'docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version'
-      - deploy:
-        command: |
-          echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          docker push cgswong/${APP_NAME}:${APP_VERSION}
+          name: Test version
+          command: |
+            docker run cgswong/${APP_NAME}:${APP_VERSION} aws --version
       - save_cache:
-        key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - "~/docker-cache"
+          key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - "~/docker-cache"
+      - deploy:
+          command: |
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+            docker push cgswong/${APP_NAME}:${APP_VERSION}
 
 workflows:
   version: 2
