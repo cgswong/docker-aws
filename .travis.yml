@@ -1,0 +1,24 @@
+sudo: enabled
+
+services:
+  - docker
+
+env:
+  AWS_VERSION: 1.16.26
+
+before_install:
+  - docker info
+  - docker --version
+  - echo "AWS CLI Version: ${AWS_VERSION}"
+  - docker build -t cgswong/aws:latest
+  
+script:
+  - docker run cgswong/aws:latest aws --version
+
+deploy:
+  provider: script
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push cgswong/aws:latest
+  on:
+    branch: master
