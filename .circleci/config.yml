@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Build image
           command: |
+            ls -la
             docker build -t cgswong/${APP_NAME}:${APP_VERSION} .
       - run:
           name: Test version
