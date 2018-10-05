@@ -3,7 +3,6 @@ version: 2.1
 jobs:
   build-test-deploy:
     machine: true
-    working_directory: "~/docker-cache"
     environment:
       APP_NAME: aws
       APP_VERSION: 1.16.26
