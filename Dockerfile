@@ -23,13 +23,15 @@ RUN apk --no-cache add \
       py-pip \
       python \
       openssh &&\
-    pip install --upgrade \
-      awscli \
+    pip install --upgrade --no-cache-dir \
       pip \
+      setuptools &&\
+    pip install --upgrade --no-cache-dir \
+      awscli \
       python-dateutil &&\
     ln -s /usr/bin/aws_bash_completer /etc/profile.d/aws_bash_completer.sh &&\
     curl -sSL --output ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
-    curl -sSL --output ${RDS_TMP} http://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
+    curl -sSL --output ${RDS_TMP} https://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
     unzip -q ${S3_TMP} -d /tmp &&\
     unzip -q ${RDS_TMP} -d /tmp &&\
     mv ${S3_ZIP}/S3 ${S3_ZIP}/s3cmd /usr/bin/ &&\
