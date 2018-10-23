@@ -1,7 +1,7 @@
-version: 2.1
+version: 2
 
 jobs:
-  build-test-deploy:
+  build-test:
     machine: true
     environment:
       APP_NAME: aws
@@ -27,6 +27,11 @@ jobs:
           key: docker-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - "~/docker-cache"
+  deploy:
+    environment:
+      APP_NAME: aws
+      APP_VERSION: 1.16.26
+    steps:
       - deploy:
           command: |
             echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
@@ -38,6 +43,12 @@ jobs:
 
 workflows:
   version: 2
-  build-test-deploy:
+  build_test_deploy:
     jobs:
-      - build-test-deploy
+      - build-test
+      - deploy
+          requires:
+            - build-test
+          filters:
+            branches:
+              only: master
