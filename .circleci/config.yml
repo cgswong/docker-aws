@@ -28,6 +28,7 @@ jobs:
           paths:
             - "~/docker-cache"
   deploy-step:
+    machine: true
     environment:
       APP_NAME: aws
       APP_VERSION: 1.16.26
