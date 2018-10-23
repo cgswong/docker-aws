@@ -38,9 +38,9 @@ jobs:
           command: |
             echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
             if [  "$CIRCLE_BRANCH" = "master" ]; then 
-              docker push cgswong/${APP_NAME}:${APP_VERSION};
+              docker push cgswong/${APP_NAME}:${APP_VERSION}
             else
-              echo "Not on master branch, will not deploy to Docker Hub;
+              echo "Not on master branch, will not deploy to Docker Hub"
             fi
 
 workflows:
