@@ -36,6 +36,7 @@ jobs:
       - checkout
       - deploy:
           command: |
+            docker build -t cgswong/${APP_NAME}:${APP_VERSION} .
             echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
             if [  "$CIRCLE_BRANCH" = "master" ]; then 
               docker push cgswong/${APP_NAME}:${APP_VERSION}
