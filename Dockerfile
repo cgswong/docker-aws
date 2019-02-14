@@ -13,6 +13,8 @@ ENV PAGER more
 
 WORKDIR /tmp
 
+ADD requirements.txt
+
 RUN apk --no-cache add \
       bash \
       bash-completion \
@@ -27,12 +29,12 @@ RUN apk --no-cache add \
     pip install --upgrade --no-cache-dir \
       pip \
       setuptools &&\
-    pip install --upgrade --no-cache-dir \
-      awscli \
+    pip install --no-cache-dir \
       python-dateutil &&\
+    pip install -r requirements.txt --no-cache-dir &&\
     ln -s /usr/bin/aws_bash_completer /etc/profile.d/aws_bash_completer.sh &&\
     curl -sSL --output ${S3_TMP} https://github.com/s3tools/s3cmd/archive/master.zip &&\
-    curl -sSL --output ${RDS_TMP} https://s3.amazonaws.com/rds-downloads/RDSCli.zip &&\
+    curl -sSL --output ${RDS_TMP} https://s3.amazonaws.com/rds-downloads/RDSCli-${RDS_VERSION}.zip &&\
     unzip -q ${S3_TMP} -d /tmp &&\
     unzip -q ${RDS_TMP} -d /tmp &&\
     mv ${S3_ZIP}/S3 ${S3_ZIP}/s3cmd /usr/bin/ &&\
