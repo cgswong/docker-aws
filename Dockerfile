@@ -13,7 +13,7 @@ ENV PAGER more
 
 WORKDIR /tmp
 
-ADD requirements.txt
+ADD requirements.txt .
 
 RUN apk --no-cache add \
       bash \
